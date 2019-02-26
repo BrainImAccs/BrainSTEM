@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# This script is used in a very simple queueing system based on GNU parallel to launch
+# the actual jobs.
+#
+
+set -e
+
+# Check if the simple parallel based queue manager is initiated
+if [[ "${2}" == "parallelSimpleQueueSystemStartup" ]]; then
+  # The catch is, that parallel will only then start to process jobs, if the queue has been
+  # full once. After that, each job will be executed, as soon it is received. Therefore, we
+  # are initiating the queue with dummy jobs.
+  echo "Dummy startup for the simple queue system performed."
+  exit 0
+fi
+
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Launch the jobs
+if [[ "$1" == "short" ]]; then
+  # Please note that the output of each job is written to a log file inside the submitted
+  # directory (catching stdout and stderr)
+
+  # Uncomment the following line to enable fatbACPC
+  #"${__dir}/../../fatbACPC/acpc.bash" -i "$2" --cleanup --debug 1>"$2/log" 2>&1
+fi

@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#
+# Global setup options for ACPC and other tools
+#
+
+# Language encoding, mostly needed for Umlaute
+#
+language_encoding="de_DE.ISO-8859-1"
+
+# PACS communication (to send studies back to the PACS)
+#
+called_aetitle="CALLING"
+calling_aetitle_short="CALLED"
+peer="127.0.0.1"
+port="1234"
+
+# PACS communication (to retrieve studies via movescu from the PACS)
+# Might not be necessary in your setup
+#
+movescu_called_aetitle_peer="CALLED"
+movescu_peer="127.0.0.1"
+movescu_port="1235"
+
+# Start the DICOM receiver on the following port
+listening_port_short=10104
+
+# Number of jobs to start in parallel in a queue
+#
+jobSlots=4
+
+# Path under which a subdirectory for all temporary files is created
+#
+tmpdir="/tmp"
+
+# Path to dcm2niix
+#
+dcm2niix=$(which dcm2niix)
+
+# Path to nifti2dicom
+#
+nifti2dicom=$(which nifti2dicom)
+# timeout after which nifti2dicom is automatically killed if it fails
+nifti2dicom_timeout="15m"
+
+# Path to DCMTK binaries
+#
+dcmftest=$(which dcmftest)
+dcmdump=$(which dcmdump)
+dcmodify=$(which dcmodify)
+storescu=$(which storescu)
+storescp=$(which storescp)
+img2dcm=$(which img2dcm)
+movescu=$(which movescu)
+
+# Path to GNU parallel
+#
+parallel=$(which parallel)
+sem=$(which sem)
+
+# Derive the main tools directory, this should be left alone
+#
+brainstemToolsDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
