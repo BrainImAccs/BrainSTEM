@@ -33,6 +33,7 @@ $ su - brainiaccs
 Clone the repository
 
 ```bash
+$ cd /path/to/brainiaccs # This folder is going to serve as the installation folder for brainstem (in a subdir) and BrainIAccs tools
 $ git clone https://github.com/brainimaccs/brainstem.git
 $ cd brainstem
 ```
@@ -59,7 +60,7 @@ port="1234"
 listening_port_short=10104
 ```
 
-Adjust the number of job slots for the `parallel` processing queue based on the number of CPU cores available:
+You may want to adjust the number of job slots for the `parallel` processing queue based on the number of CPU cores available:
 
 ```bash
 # Number of jobs to start in parallel in a queue
