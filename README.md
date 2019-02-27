@@ -91,6 +91,8 @@ $ incoming/incoming-short.bash
 
 Now configure your PACS to send images to the DICOM receiver running on your server, send an image and wait for the response.
 
+After being processed in the `incoming/` folder, the received series will be moved to `received/` and processed. After processing, most files will be removed, except for the reference DICOM file, which is used to synchronise DICOM tags between the original and aligned series, and some results from the alignment process.
+
 # Debugging
 
 A number of log files are created:
