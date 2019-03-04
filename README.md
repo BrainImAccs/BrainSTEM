@@ -2,6 +2,10 @@
 
 This package contains the base layer for other components of the Brain Imaging Accessoires toolkit, i.e. tools and functions for receiving, handling and sending DICOM files. It is meant to be run on a Linux server to receive DICOM files from the Picture Archiving and Communication System (PACS) or modalities, process the scans in a parallel fashion and then export the results back to the PACS.
 
+Different [modules](https://github.com/brainimaccs/brainstem#modules) (i.e. accessoires) are available.
+
+Please note, that this software is research-only.
+
 # Receiving DICOM files and queueing system
 
 `storescp` from `DCMTK` is used to receive DICOM files (see `incoming/incoming-short.bash`). As soon as a study has been received, `storescp` calls `received-short.bash` to separate the study into single series, if necessary, and submit those to a work queue. The work queue is based on `parallel` (see `received/queue-short.bash`), so that a configurable number of series (see `setup.brainstem.bash(-template)`) can be processed simultaneously.
@@ -33,10 +37,19 @@ $ su - brainiaccs
 Clone the repository
 
 ```bash
-$ cd /path/to/brainiaccs # This folder is going to serve as the installation folder for brainstem (in a subdir) and BrainIAccs tools
 $ git clone https://github.com/brainimaccs/brainstem.git
 $ cd brainstem
+$ git submodule init
+$ git submodule update
 ```
+
+# Modules
+
+brainIAccs comes with different modules. Modules are developed separetly (each with their own repository), and are integrated into brainstem using GIT submodules. Currently, only one is available:
+
+* [fatbACPC](https://github.com/brainimaccs/fatbACPC): Fully automatic tilting of brainscans to Anterior Commissure - Posterior Commissure line
+
+**PLEASE NOTE**: Each module needs to be _configured separately_! See the README.md of each repository.
 
 # Configuration
 

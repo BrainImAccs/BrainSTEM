@@ -23,5 +23,5 @@ if [[ "$1" == "short" ]]; then
   # directory (catching stdout and stderr)
 
   # Uncomment the following line to enable fatbACPC
-  #"${__dir}/../../fatbACPC/fatbACPC.bash" -i "$2" --cleanup --debug 1>"$2/log" 2>&1
+  #"${__dir}/modules/fatbACPC/fatbACPC.bash" -i "$2" --cleanup --debug 1>"$2/log" 2>&1
 fi
