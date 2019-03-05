@@ -1,8 +1,8 @@
-# Brain Imaging Accessoires: Brainstem
+# Brainimaccs System That Executes Modules (BrainSTEM)
 
-This package contains the base layer for other components of the Brain Imaging Accessoires toolkit, i.e. tools and functions for receiving, handling and sending DICOM files. It is meant to be run on a Linux server to receive DICOM files from the Picture Archiving and Communication System (PACS) or modalities, process the scans in a parallel fashion and then export the results back to the PACS.
+This package contains the base layer for other components of the Brain Imaging Accessoires (BrainImAccs) toolkit, i.e. tools and functions for receiving, handling and sending DICOM files. It is meant to be run on a Linux server to receive DICOM files from the Picture Archiving and Communication System (PACS) or modalities, process the scans in a parallel fashion and then export the results back to the PACS.
 
-Different [modules](https://github.com/brainimaccs/brainstem#modules) (i.e. accessoires) are available.
+Different [modules](https://github.com/brainimaccs/brainstem#modules) (i.e. accessoires) are available. After successful installation, these modules can be run directly on folders containing DICOM studies. It is not a requirement to receive the studies e.g. from the PACS.
 
 Please note, that this software is research-only.
 
@@ -27,18 +27,13 @@ We are listing the software versions we used (likely the latest available during
 
 ## Installation
 
-Create an user for the BrainIAccs tools and switch to it.
-
-```bash
-$ useradd -m -s /bin/bash brainiaccs
-$ su - brainiaccs
-```
+Do not run BrainImAccs as root. Create a separate user or use an existing one.
 
 Clone the repository
 
 ```bash
-$ git clone https://github.com/brainimaccs/brainstem.git
-$ cd brainstem
+$ git clone https://github.com/BrainImAccs/BrainSTEM.git
+$ cd BrainSTEM
 $ git submodule init
 $ git submodule update
 ```
@@ -59,7 +54,7 @@ Copy the setup templates:
 $ cp setup.brainstem.bash-template setup.brainstem.bash
 ```
 
-You will only need to update the DICOM/PACS communication options in `setup.brainstem.bash`:
+If you wish to use the DICOM receive/send functionatlity, you will only need to update the DICOM/PACS communication options in `setup.brainstem.bash`:
 
 ```bash
 # PACS communication
@@ -93,7 +88,7 @@ Edit `tools/startJob.bash` to assign jobs to the respective queues (at the momen
 
 # Running
 
-Run the following commands as the user you created during installation.
+Run the following commands as the non-root user you are using for BrainImAccs.
 
 ```bash
 # Start the "short" queue

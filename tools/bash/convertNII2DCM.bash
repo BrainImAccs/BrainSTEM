@@ -46,7 +46,7 @@ function convertNII2DCM {
     --accessionnumber "${acc_no}" \
     --useoriginalseries --dicomheaderfile "${ref_dcm}" \
     --seriesnumber ${series_no} \
-    --manufacturer "BrainIAccs" 1>/dev/null
+    --manufacturer "BrainImAccs" 1>/dev/null
 
   # Copy the following DICOM tags from the reference DICOM file into the new DICOM stack:
   #
