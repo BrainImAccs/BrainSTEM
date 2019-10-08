@@ -11,7 +11,7 @@ function convertNII2DCM {
   # Input NIfTI file
   local input_nii="${1}"
   # Output directory
-  local output="${2}"
+  local output_dir="${2}"
   # Series number to be used in the DICOM stack
   local series_no="${3}"
   # Descired DICOM series description
@@ -50,7 +50,7 @@ function convertNII2DCM {
   # (see setup.brainstem.bash)
   #
   timeout ${nifti2dicom_timeout} ${nifti2dicom} \
-    -o "${output}" \
+    -o "${output_dir}" \
     -i "${input_nii}" \
     --modality ${modality} \
     --accessionnumber "${acc_no}" \
@@ -112,7 +112,7 @@ function convertNII2DCM {
   fi
 
   # Copy the DICOM values from the tags defined above onto the generated stack of DICOM images
-  copyDCMTags "${ref_dcm}" "${output}" "${copy_dcm_tags}"
+  copyDCMTags "${ref_dcm}" "${output_dir}" "${copy_dcm_tags}"
 
   # Copy modality specific tags from the reference DICOM file
   case $modality in
@@ -125,7 +125,7 @@ function convertNII2DCM {
     "
 
     # Copy the DICOM values from the tags defined above onto the generated stack of DICOM images
-    copyDCMTags "${ref_dcm}" "${output}" "${copy_dcm_tags}"
+    copyDCMTags "${ref_dcm}" "${output_dir}" "${copy_dcm_tags}"
     ;;
   esac
 
