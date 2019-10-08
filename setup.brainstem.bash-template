@@ -32,6 +32,13 @@ jobSlots=4
 #
 tmpdir="/tmp"
 
+# In our local setup, we have to replace the last two positions of the accession number and the
+# study description in order to route the resulting image to the research PACS. This is likely
+# very specific to our local installation. If empty (default), the accession number or study
+# description will not be touched.
+replace_acc_no_last_two=""
+replace_study_description=""
+
 # Path to dcm2niix
 #
 dcm2niix=$(which dcm2niix)
@@ -56,7 +63,3 @@ movescu=$(which movescu)
 #
 parallel=$(which parallel)
 sem=$(which sem)
-
-# Derive the main tools directory, this should be left alone
-#
-brainstemToolsDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
