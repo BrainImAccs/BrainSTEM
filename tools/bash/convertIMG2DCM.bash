@@ -49,7 +49,7 @@ function convertIMG2DCM {
 
     # Convert images to DICOM. Meta data will be taken from the reference DICOM file only.
     local slice=001
-    while [[ -e "${input_dir}/vb-slice${slice}.jpg" ]]; do
+    while [[ -e "${input_dir}/bia-slice${slice}.jpg" ]]; do
       ${img2dcm} \
         --new-sc \
         --study-from "${ref_dcm}" \
