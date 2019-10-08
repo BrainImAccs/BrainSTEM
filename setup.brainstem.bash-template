@@ -10,7 +10,8 @@ language_encoding="de_DE.ISO-8859-1"
 # PACS communication (to send studies back to the PACS)
 #
 called_aetitle="CALLING"
-calling_aetitle_short="CALLED"
+calling_aetitle_short="CALLED_SHORT"
+calling_aetitle_long="CALLED_LONG"
 peer="127.0.0.1"
 port="1234"
 
@@ -23,6 +24,7 @@ movescu_port="1235"
 
 # Start the DICOM receiver on the following port
 listening_port_short=10104
+listening_port_long=10105
 
 # Number of jobs to start in parallel in a queue
 #

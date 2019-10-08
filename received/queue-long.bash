@@ -3,7 +3,7 @@
 # This scripts uses GNU parallel for a simple queueing system, so that a certain number of jobs can be processed in
 # parallel.
 #
-# This script will use the "short" queue
+# This script will use the "long" queue
 #
 
 # Get the path to the directory of this script
@@ -14,7 +14,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # The name of this queue and it's queue file 
 # received-short.bash (in this case) will write new jobs to the queue file 
-queue="short"
+queue="long"
 queueFile="${__dir}/${queue}/queue"
 
 # Start fresh; remove the old queue file
