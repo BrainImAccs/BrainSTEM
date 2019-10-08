@@ -21,10 +21,11 @@ Either your PACS can be set up to send DICOM series to the `storescp` node, or y
 We are listing the software versions we used (likely the latest available during development), but we are currently not aware that we rely on any features that are specific to one of the software's versions.
 
 * [BASH](https://www.gnu.org/software/bash/), we used v4.4.19(1)
-* [bc](https://www.gnu.org/software/bc/), we used 1.07.1
+* [bc](https://www.gnu.org/software/bc/), we used v1.07.1
 * [dcm2niix](https://github.com/rordenlab/dcm2niix), we used v1.0.20180622
 * [DCMTK](https://dicom.offis.de/dcmtk), we used v3.6.3
 * [nifti2dicom](https://github.com/biolab-unige/nifti2dicom), we used v0.4.11
+* [med2image](https://github.com/FNNDSC/med2image), we used v1.1.2
 * [parallel](https://www.gnu.org/software/parallel/), we used v20180822
 
 ## Installation
