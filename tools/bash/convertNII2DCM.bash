@@ -55,6 +55,7 @@ function convertNII2DCM {
     --modality ${modality} \
     --accessionnumber "${acc_no}" \
     ${do_replace_study_description} \
+    --seriesdescription "${series_description}" \
     --useoriginalseries --dicomheaderfile "${ref_dcm}" \
     --seriesnumber ${series_no} \
     --manufacturer "BrainImAccs" 1>/dev/null || error "nifti2dicom failed"
