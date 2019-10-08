@@ -5,16 +5,16 @@
 
 function generateUID {
   # Prefix the "suffix" part of the UID
-  local prefix="${1}"
+  local prefix="${1:-}"
 
-  # Test if the prefix supplied is a number
-  if [[ ! $prefix =~ ^[0-9]+$ ]]; then
-    error "  Prefix for UID has to be a number!"
+  # If the prefix has not been supplied to the function, check the $prefixUID environment variable
+  if [[ ! "$prefix" ]]; then
+    prefix=${prefixUID}
   fi
 
-  # The prefix cannot start with a zero (unless it's only a zero)
-  if [[ $prefix =~ ^0[0-9]+$ ]]; then
-    error "  Prefix for UID cannot start with zero!"
+  # Test if the prefix supplied is a number. It cannot start with a zero (unless it's only a zero)
+  if [[ ! $prefix =~ ^[1-9][0-9]$ ]]; then
+    error "  Prefix for UID has to a two digit number and cannot start with zero!"
   fi
 
   # Organization Identified (Source: https://www.medicalconnections.co.uk/FreeUID/)
@@ -37,8 +37,8 @@ function generateUID {
     sed -e 's/.* \(\([[:xdigit:]]\{1,2\}:\)\{5\}[[:xdigit:]]\{1,2\}\) .*/\U\1/' -e 's/://g')" | \
   bc)
 
-  # Generate UID by concatting OID, prefix, up to 5 random numbers, hardware address, date and time
-  echo $(echo ${OID}.${prefix}$(shuf -i 1-99999 -n1)${hwaddr_decimal}$(date "+%Y%m%d%H%M%S"))
+  # Generate UID by concatting OID, prefix, up to 4 random numbers, hardware address, date and time
+  echo $(echo ${OID}.${prefix}$(shuf -i 1-9999 -n1)${hwaddr_decimal}$(date "+%Y%m%d%H%M%S"))
 }
 
 # Export the function to be used when sourced, but do not allow the script to be called directly
