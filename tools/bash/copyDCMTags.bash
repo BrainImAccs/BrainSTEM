@@ -28,9 +28,10 @@ function copyDCMTags {
         -e 's/\\/\\\\/g' | while read tag data; do
           # Copy the values onto all files in the specified directory
           info "    Setting ${tag}=${data}"
-          "${dcmodify}" --insert "$tag"="$data" "${output_dir}"/*
-          # Remove the backup files automatically created by dcmodify
-          rm "$2"/*.bak
+          "${dcmodify}" \
+            --no-backup \
+            --insert "$tag"="$data" \
+            "${output_dir}"/*
       done
 
   info "  copyDCMTags done"
