@@ -1,0 +1,4 @@
+java.log.*
+*/*.log
+*/*-UKD*
+setup.brainstem.bash
