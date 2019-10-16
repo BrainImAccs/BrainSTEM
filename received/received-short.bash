@@ -21,40 +21,13 @@ queue="short"
 queueDir="${__dir}/${queue}"
 parentDir="${queueDir}/"$(date "+%Y%m%d-%H%M%S")
 
-# Initiate loop variables
-currentSeriesUID=""
-jobDir=""
+# Source the common functions, if necessary
+if [[ ! "$(type -t dcmSort)" = "function" ]]; then
+  source "${__dir}/received_common.bash"
+fi
 
-# Dump filename, modality, series number and series UID of each DICOM file, to be used in a loop
-# Sort the output by the fourth column, which is the series UID and run a while loop on the output
-${dcmdump} \
-  --print-all \
-  --print-filename \
-  --search 0008,0060 \
-  --search 0020,0011 \
-  --search 0020,000e \
-  "$incoming"/* | \
-    sed -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) [A-Z][A-Z] \[\(.*\)\].*#.*/\2/' | \
-    sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/§/g' | \
-    sed -e "s/# dcmdump ([0-9\/]\+): /\n/g" | tail -n +2 | sort -k4 | while IFS="§" read dcm modality seriesNo seriesUID rest; do
-      # Ignore any Presentation State (PR) modality DICOM files
-      if [[ "$modality" == "PR" ]]; then continue; fi
-
-      # If a new series UID appears, start storing the files into a new subdirectory
-      if [[ "$seriesUID" != "$currentSeriesUID" ]]; then
-        jobDir="${parentDir}/${seriesNo}-${seriesUID}"
-
-        # Create the subdirectory and add it to a file, which will later be concatted to the global queue
-        mkdir -p "${jobDir}" && \
-        echo ${jobDir} >> "${parentDir}/toqueue"
-      fi
-
-      # Move the file to the respective subdirectory
-      mv "${dcm}" "${jobDir}/"
-
-      # Update currentSeriesUID, so that the next iteration of the loop can check for a new series
-      currentSeriesUID=$seriesUID
-    done
+# Sort the DICOM files from the incoming directory into the target (parent) directory and generate some metadata
+dcmSort "${incoming}" "${parentDir}"
 
 # Remove the old (now empty) directory and concat the temporary queue file to the global queue, to be executed
 rm -rf "$incoming" && \
