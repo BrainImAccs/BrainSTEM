@@ -13,6 +13,14 @@ function getDCMTag {
   # Be verbose during the process (default)
   local verbose="${3:-}"
 
+  # Check if file exists and is a regular file
+  if [[ ! -f "${dcm}" ]]; then
+    error "  ${dcm} does not exist."
+  else
+    # Get basename for later use
+    dcmBasename=$(basename "${dcm}")
+  fi
+
   # Define temporary variables, get dcmdump result in tempValue
   local value=""
   local tempValue=$(${dcmdump} \
@@ -27,7 +35,7 @@ function getDCMTag {
   if [[ ${#tempValue} -eq 0 ]]; then
     # Print tag, DICOM filename as warning (unless supressed)
     if [[ $verbose != "n" ]]; then
-      warning "  (${tag}) of $(basename ${dcm}) is not set."
+      warning "  (${tag}) of ${dcmBasename} is not set."
     fi
 
     echo "NOT_FOUND_IN_DICOM_HEADER"
@@ -42,7 +50,7 @@ function getDCMTag {
 
   # Print tag, DICOM filename and tag value to the console
   if [[ $verbose != "n" ]]; then
-    info "  (${tag}) of $(basename ${dcm}) is ${value}."
+    info "  (${tag}) of ${dcmBasename} is ${value}."
   fi
 
   # Echo the cleaned up DICOM tag value as the result of the function
