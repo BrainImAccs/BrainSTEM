@@ -45,6 +45,13 @@ replace_study_description=""
 #
 dcm2niix=$(which dcm2niix)
 
+# Setup FSL (if not loaded already)
+#
+if [[ -z $FSLDIR ]]; then
+  export FSLDIR="/path/to/fsl-5.0.11"
+  source ${FSLDIR}/etc/fslconf/fsl.sh
+fi
+
 # Path to nifti2dicom
 #
 nifti2dicom=$(which nifti2dicom)

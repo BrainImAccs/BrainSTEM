@@ -24,6 +24,7 @@ We are listing the software versions we used (likely the latest available during
 * [bc](https://www.gnu.org/software/bc/), we used v1.07.1
 * [dcm2niix](https://github.com/rordenlab/dcm2niix), we used v1.0.20180622
 * [DCMTK](https://dicom.offis.de/dcmtk), we used v3.6.3
+* [FSL](https://fsl.fmrib.ox.ac.uk/), we used v5.0.11
 * [nifti2dicom](https://github.com/biolab-unige/nifti2dicom), we used v0.4.11
 * [med2image](https://github.com/FNNDSC/med2image), we used v1.1.2
 * [parallel](https://www.gnu.org/software/parallel/), we used v20180822

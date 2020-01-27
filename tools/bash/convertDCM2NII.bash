@@ -47,6 +47,15 @@ function convertDCM2NII {
   else
     nii=($(ls -1t "${output}"/*[0-9]".${extension}" | tac | head -n1))
   fi
+
+  info "  fslreorient2std start"
+    local nii_reoriented=$(echo ${nii} | sed -e 's/\.nii/-reoriented.nii/')
+    "${FSLDIR}/bin/fslreorient2std" \
+      "${nii}" \
+      "${nii_reoriented}"
+    nii=${nii_reoriented}
+  info "  fslreorient2std done"
+
   export nii
 
   info "convertDCM2NII done"
