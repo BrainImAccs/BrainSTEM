@@ -1,4 +1,6 @@
 # Brainimaccs System That Executes Modules (BrainSTEM)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBrainImAccs%2FBrainSTEM.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FBrainImAccs%2FBrainSTEM?ref=badge_shield)
+
 
 This package contains the base layer for other components of the Brain Imaging Accessoires (BrainImAccs) toolkit, i.e. tools and functions for receiving, handling and sending DICOM files. It is meant to be run on a Linux server to receive DICOM files from the Picture Archiving and Communication System (PACS) or modalities, process the scans in a parallel fashion and then export the results back to the PACS.
 
@@ -127,3 +129,7 @@ A number of log files are created:
 # Acknowledgements
 
 The main scripts are based on the [BASH3 Boilerplate](http://bash3boilerplate.sh).
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FBrainImAccs%2FBrainSTEM.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FBrainImAccs%2FBrainSTEM?ref=badge_large)
