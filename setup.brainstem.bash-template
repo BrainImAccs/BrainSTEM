@@ -2,6 +2,8 @@
 #
 # Global setup options for ACPC and other tools
 #
+# Note: Whenever you encounter a '-z' if test, these config variables may be overridden by setting an environment variable
+#
 
 # Language encoding, mostly needed for Umlaute
 #
@@ -9,26 +11,26 @@ language_encoding="de_DE.ISO-8859-1"
 
 # PACS communication (to send studies back to the PACS)
 #
-called_aetitle="CALLING"
-calling_aetitle_short="CALLED_SHORT"
-calling_aetitle_long="CALLED_LONG"
-peer="127.0.0.1"
-port="1234"
+if [ -z ${called_aetitle+x} ]; called_aetitle="CALLING"; fi
+if [ -z ${calling_aetitle_short+x} ]; calling_aetitle_short="CALLED_SHORT"; fi
+if [ -z ${calling_aetitle_long+x} ]; calling_aetitle_long="CALLED_LONG"; fi
+if [ -z ${peer+x} ]; peer="127.0.0.1"; fi
+if [ -z ${port+x} ]; port=1234; fi
 
 # PACS communication (to retrieve studies via movescu from the PACS)
 # Might not be necessary in your setup
 #
-movescu_called_aetitle_peer="CALLED"
-movescu_peer="127.0.0.1"
-movescu_port="1235"
+if [ -z ${movescu_called_aetitle_peer+x} ]; movescu_called_aetitle_peer="CALLED"; fi
+if [ -z ${movescu_peer+x} ]; movescu_peer="127.0.0.1"; fi
+if [ -z ${movescu_port+x} ]; movescu_port=1235; fi
 
 # Start the DICOM receiver on the following port
-listening_port_short=10104
-listening_port_long=10105
+if [ -z ${listening_port_short+x} ]; listening_port_short=10104; fi
+if [ -z ${listening_port_long+x} ]; listening_port_long=10105; fi
 
 # Number of jobs to start in parallel in a queue
 #
-jobSlots=4
+if [ -z ${jobSlots+x} ]; jobSlots=4; fi
 
 # Path under which a subdirectory for all temporary files is created
 #
@@ -47,7 +49,7 @@ dcm2niix=$(which dcm2niix)
 
 # Setup FSL (if not loaded already)
 #
-if [[ -z $FSLDIR ]]; then
+if [ -z ${FSLDIR+x} ]; then
   export FSLDIR="/path/to/fsl-5.0.11"
   source ${FSLDIR}/etc/fslconf/fsl.sh
 fi
