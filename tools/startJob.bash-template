@@ -28,6 +28,6 @@ elif [[ "$1" == "long" ]]; then
   # Please note that the output of each job is written to a log file inside the submitted
   # directory (catching stdout and stderr)
 
-  # Uncomment the following line to enable fatbACPC
+  # Uncomment the following line to enable veganbagel
   #"${__dir}/../modules/veganbagel/veganbagel.bash" -i "$2" --cleanup 1>"$2/log" 2>&1
 fi
