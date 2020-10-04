@@ -11,26 +11,26 @@ language_encoding="de_DE.ISO-8859-1"
 
 # PACS communication (to send studies back to the PACS)
 #
-if [ -z ${called_aetitle+x} ]; called_aetitle="CALLING"; fi
-if [ -z ${calling_aetitle_short+x} ]; calling_aetitle_short="CALLED_SHORT"; fi
-if [ -z ${calling_aetitle_long+x} ]; calling_aetitle_long="CALLED_LONG"; fi
-if [ -z ${peer+x} ]; peer="127.0.0.1"; fi
-if [ -z ${port+x} ]; port=1234; fi
+if [ -z ${called_aetitle+x} ]; then called_aetitle="CALLING"; fi
+if [ -z ${calling_aetitle_short+x} ]; then calling_aetitle_short="CALLED_SHORT"; fi
+if [ -z ${calling_aetitle_long+x} ]; then calling_aetitle_long="CALLED_LONG"; fi
+if [ -z ${peer+x} ]; then peer="127.0.0.1"; fi
+if [ -z ${port+x} ]; then port=1234; fi
 
 # PACS communication (to retrieve studies via movescu from the PACS)
 # Might not be necessary in your setup
 #
-if [ -z ${movescu_called_aetitle_peer+x} ]; movescu_called_aetitle_peer="CALLED"; fi
-if [ -z ${movescu_peer+x} ]; movescu_peer="127.0.0.1"; fi
-if [ -z ${movescu_port+x} ]; movescu_port=1235; fi
+if [ -z ${movescu_called_aetitle_peer+x} ]; then movescu_called_aetitle_peer="CALLED"; fi
+if [ -z ${movescu_peer+x} ]; then movescu_peer="127.0.0.1"; fi
+if [ -z ${movescu_port+x} ]; then movescu_port=1235; fi
 
 # Start the DICOM receiver on the following port
-if [ -z ${listening_port_short+x} ]; listening_port_short=10104; fi
-if [ -z ${listening_port_long+x} ]; listening_port_long=10105; fi
+if [ -z ${listening_port_short+x} ]; then listening_port_short=10104; fi
+if [ -z ${listening_port_long+x} ]; then listening_port_long=10105; fi
 
 # Number of jobs to start in parallel in a queue
 #
-if [ -z ${jobSlots+x} ]; jobSlots=4; fi
+if [ -z ${jobSlots+x} ]; then jobSlots=4; fi
 
 # Path under which a subdirectory for all temporary files is created
 #
