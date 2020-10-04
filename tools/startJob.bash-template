@@ -24,10 +24,16 @@ if [[ "$1" == "short" ]]; then
 
   # Uncomment the following line to enable fatbACPC
   #"${__dir}/../modules/fatbACPC/fatbACPC.bash" -i "$2" --cleanup 1>"$2/log" 2>&1
+
+  # Just in case nothing has been commented out
+  /bin/true
 elif [[ "$1" == "long" ]]; then
   # Please note that the output of each job is written to a log file inside the submitted
   # directory (catching stdout and stderr)
 
   # Uncomment the following line to enable veganbagel
   #"${__dir}/../modules/veganbagel/veganbagel.bash" -i "$2" --cleanup 1>"$2/log" 2>&1
+
+  # Just in case nothing has been commented out
+  /bin/true
 fi
