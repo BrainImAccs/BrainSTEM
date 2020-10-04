@@ -22,12 +22,18 @@ function getDCMTag {
   fi
 
   # Define temporary variables, get dcmdump result in tempValue
+  # - Make sure to get top level tag only by using --prepend and excluding nested tags
+  # - Empty tempValue for tags which only contain "(no value available)"
   local value=""
   local tempValue=$(${dcmdump} \
+    --convert-to-utf8 \
     --print-all \
+    --prepend \
     --no-uid-names \
     --search ${tag} \
-    "${dcm}"
+    "${dcm}" | \
+      grep -vE '^.*\)\.\(.* ' | \
+      sed -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) LO (no value available).*#.*//' \
   )
 
   # If the length of tempValue is 0, the DICOM file does not contain that tag
