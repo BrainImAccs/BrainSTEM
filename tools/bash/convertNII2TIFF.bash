@@ -18,7 +18,7 @@ function convertNII2TIFF {
   ${med2image} \
     --inputFile "$input_nii" \
     --outputFileStem "${output_file_prefix}.tiff" \
-    --outputDir "${output}" 1>/dev/null || error "med2image failed"
+    --outputDir "${output}" 1>${output}/med2image.log 2>&1 || error "med2image failed"
 
   # Force the numbering to start with 001 instead of 000 and rename file accordingly
   # Rename files in parallel using GNU parallel's sem
@@ -27,6 +27,8 @@ function convertNII2TIFF {
     printf -v slice_no_incr "%03d" $(echo "$slice_no + 1" | bc)
     LANG=C ${sem} -j+0 "mv '$slice' '${output}/${output_file_prefix}-slice${slice_no_incr}.tiff'"
   done
+
+  sem --wait
 
   info "convertNII2TIFF done"
 }
