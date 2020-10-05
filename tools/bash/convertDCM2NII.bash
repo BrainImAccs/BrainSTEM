@@ -18,7 +18,7 @@ function convertDCM2NII {
   # Validate $do_gzip
   if [[ ! $do_gzip =~ ^[yn]$ ]]; then
     warning "  do_gzip must be either 'y' or 'n', we assume 'y' here."
-    $do_gzip = "y"
+    do_gzip="y"
   fi
 
   # Run dcm2niix.
