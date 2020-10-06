@@ -41,6 +41,6 @@ function copyDCMTags {
 if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
   export -f copyDCMTags
 else
-  echo "getDCMTag is an internal function and cannot be called directly."
+  echo "copyDCMTag is an internal function and cannot be called directly."
   exit 1
 fi
