@@ -5,8 +5,6 @@
 # directories and submits a job per series.
 # 
 
-set -x
-
 # incoming-short.bash calls this script with the path to the received files as first argument
 incoming=$1
 
