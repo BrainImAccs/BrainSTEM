@@ -76,9 +76,8 @@ function convertIMG2DCM {
     # 0020,0032 ImagePosition (Patient)
     # 0020,0037 ImageOrientation (Patient)
 
-    cat "${input_dir}/../index-dcm-in" | while read slice dcm; do
+    cat "${input_dir}/../index-dcm-in" | while read slice ImagePositionPatient dcm; do
       local SliceLocation=$(getDCMTag "${dcm}" "0020,1041" "n")
-      local ImagePositionPatient=$(getDCMTag "${dcm}" "0020,0032" "n")
       local ImageOrientationPatient=$(getDCMTag "${dcm}" "0020,0037" "n")
 
       ${img2dcm} \
