@@ -7,7 +7,7 @@
 set -e
 
 # Check if the simple parallel based queue manager is initiated
-if [[ "${2}" == "parallelSimpleQueueSystemStartup" ]]; then
+if [[ "${1}" == "parallelSimpleQueueSystemStartup" ]]; then
   # The catch is, that parallel will only then start to process jobs, if the queue has been
   # full once. After that, each job will be executed, as soon it is received. Therefore, we
   # are initiating the queue with dummy jobs.
