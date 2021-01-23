@@ -3,8 +3,6 @@
 # This scripts uses GNU parallel for a simple queueing system, so that a certain number of jobs can be processed in
 # parallel.
 #
-# This script will use the "short" queue
-#
 
 # Get the path to the directory of this script
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -13,9 +11,8 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "${__dir}/../setup.brainstem.bash"
 
 # The name of this queue and it's queue file 
-# received-short.bash (in this case) will write new jobs to the queue file 
-queue="short"
-queueFile="${__dir}/${queue}/queue"
+# received.bash (in this case) will write new jobs to the queue file 
+queueFile="${__dir}/data/queue"
 
 # Start fresh; remove the old queue file
 if [[ -e "${queueFile}" ]]; then rm "${queueFile}"; fi
@@ -31,5 +28,4 @@ done
 (tail -f -n+0 "${queueFile}" | ${parallel} \
   --max-procs $jobSlots \
   --ungroup \
-  --joblog "${__dir}/${queue}-queue.log" \
-  "${__dir}/../tools/startJob.bash" "${queue}" ::: || true) 1> "${__dir}/parent-${queue}.log" 2>&1 &
+  "${__dir}/../tools/startJob.bash" ::: || true) &

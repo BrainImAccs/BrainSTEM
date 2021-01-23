@@ -12,8 +12,7 @@ language_encoding="de_DE.ISO-8859-1"
 # PACS communication (to send studies back to the PACS)
 #
 if [ -z ${called_aetitle+x} ]; then called_aetitle="CALLING"; fi
-if [ -z ${calling_aetitle_short+x} ]; then calling_aetitle_short="CALLED_SHORT"; fi
-if [ -z ${calling_aetitle_long+x} ]; then calling_aetitle_long="CALLED_LONG"; fi
+if [ -z ${calling_aetitle+x} ]; then calling_aetitle="CALLED"; fi
 if [ -z ${peer+x} ]; then peer="127.0.0.1"; fi
 if [ -z ${port+x} ]; then port=1234; fi
 
@@ -25,8 +24,7 @@ if [ -z ${movescu_peer+x} ]; then movescu_peer="127.0.0.1"; fi
 if [ -z ${movescu_port+x} ]; then movescu_port=1235; fi
 
 # Start the DICOM receiver on the following port
-if [ -z ${listening_port_short+x} ]; then listening_port_short=10104; fi
-if [ -z ${listening_port_long+x} ]; then listening_port_long=10105; fi
+if [ -z ${listening_port+x} ]; then listening_port=10105; fi
 
 # Number of jobs to start in parallel in a queue
 #
@@ -40,8 +38,8 @@ tmpdir="/tmp"
 # study description in order to route the resulting image to the research PACS. This is likely
 # very specific to our local installation. If empty (default), the accession number or study
 # description will not be touched.
-replace_acc_no_last_two=""
-replace_study_description=""
+if [ -z ${replace_acc_no_last_two+x} ]; then replace_acc_no_last_two=""; fi
+if [ -z ${replace_study_description+x} ]; then replace_study_description=""; fi
 
 # Path to dcm2niix
 #
