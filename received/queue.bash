@@ -28,4 +28,4 @@ done
 (tail -f -n+0 "${queueFile}" | ${parallel} \
   --max-procs $jobSlots \
   --ungroup \
-  "${__dir}/../tools/startJob.bash" ::: || true) &
+  "${__dir}/../tools/startJob.bash" ::: || true)

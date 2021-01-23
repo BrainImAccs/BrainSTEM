@@ -18,4 +18,4 @@ ${storescp} \
 	--filename-extension '.dcm' \
 	--exec-on-eostudy "$incomingDir/../received/received.bash #p" \
 	--eostudy-timeout 30 \
-	${listening_port} &
+	${listening_port}
