@@ -18,6 +18,10 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 queueDir="${__dir}/data"
 parentDir="${queueDir}/"$(date "+%Y%m%d-%H%M%S")
 
+# Check if directory for queued data exists (should be a tmpfs mount by Docker),
+# otherwise create it
+if [ ! -d "${queueDir}" ]; then mkdir "${queueDir}"; fi
+
 # Function for sorting DICOM files according to series number and UID while generating metadata
 function dcmSort {
   # Incoming directory containing (potentially unsorted) DICOM files
