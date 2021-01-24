@@ -21,24 +21,22 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #"${__dir}/../modules/fatbACPC/fatbACPC.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
 #"${__dir}/../modules/veganbagel/veganbagel.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
 
+# Modify the options to the module using environment variables
+
 # Per default cleanup everything
 parameters="--total-cleanup"
-
-# Modify the options to the module using environment variables
-# Note: This will be triggered, when the environment variable exists, it does not depend on the value
-
 # Maybe only do cleanup
-if [ ! -z ${BIA_CLEANUP+x} ]; then parameters="--cleanup"; fi
+if [[ "${BIA_CLEANUP:?}" = "1" ]]; then parameters="--cleanup"; fi
 
 # Other module options for debugging, logging, etc.
-if [ ! -z ${BIA_KEEP_WORKDIR+x} ]; then parameters=" ${parameters} --keep-workdir"; fi
-if [ ! -z ${BIA_VERBOSE+x} ]; then parameters="${parameters} -v"; fi
-if [ ! -z ${BIA_DEBUG+x} ]; then parameters="${parameters} --debug"; fi
-if [ ! -z ${BIA_NO_PACS+x} ]; then parameters="${parameters} --no-pacs"; fi
+if [[ "${BIA_KEEP_WORKDIR:?}" = "1" ]]; then parameters=" ${parameters} --keep-workdir"; fi
+if [[ "${BIA_VERBOSE:?}" = "1" ]]; then parameters="${parameters} -v"; fi
+if [[ "${BIA_DEBUG:?}" = "1" ]]; then parameters="${parameters} --debug"; fi
+if [[ "${BIA_NO_PACS:?}" = "1" ]]; then parameters="${parameters} --no-pacs"; fi
 
 # Either write and keep log - or don't (default)
-if [ ! -z ${BIA_WRITE_LOG+x} ]; then
-  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1" 1>"$1/log" 2>&1
+if [[ "${BIA_WRITE_LOG:?}" = "1" ]]; then
+  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1" ${parameters} 1>"$1/log" 2>&1
 else
-  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1"
+  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1" ${parameters}
 fi
