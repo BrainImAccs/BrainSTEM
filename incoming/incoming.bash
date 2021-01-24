@@ -9,6 +9,10 @@ incomingDir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Source setup.brainstem.bash
 . "$incomingDir/../setup.brainstem.bash"
 
+# Check if directory for incoming data exists (should be a tmpfs mount by Docker),
+# otherwise create it
+if [ ! -d "$incomingDir/data/" ]; then mkdir "$incomingDir/data/"; fi
+
 # Run storescp to receive DICOM files, store them and run a script once a study has been completely received
 ${storescp} \
   --verbose \
