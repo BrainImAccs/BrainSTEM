@@ -10,9 +10,13 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Source setup.brainstem.bash
 . "${__dir}/../setup.brainstem.bash"
 
-# The name of this queue and it's queue file 
+# The directory of this queue and it's queue file 
 # received.bash (in this case) will write new jobs to the queue file 
-queueFile="${__dir}/data/queue"
+queueDir="${__dir}/data"
+queueFile="${queueDir}/queue"
+
+# Check if directory for queue file exists, otherwise create it
+if [[ ! -d "${queueDir}" ]]; then mkdir -p "${queueDir}"; fi
 
 # Start fresh; remove the old queue file
 if [[ -e "${queueFile}" ]]; then rm "${queueFile}"; fi
