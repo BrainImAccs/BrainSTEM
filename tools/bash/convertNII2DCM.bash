@@ -60,6 +60,15 @@ function convertNII2DCM {
     --seriesnumber ${series_no} \
     --manufacturer "BrainImAccs" 1>/dev/null || error "nifti2dicom failed"
 
+  # Set encoding to ISO_IR 192 (= UTF-8) for the new DICOMs
+  for dcm in "${output_dir}"/*.dcm; do
+    "${sem}" -j+0 "${dcmodify}" \
+      --no-backup \
+      --insert \'"(0008,0005)"="ISO_IR 192"\' \
+      "${dcm}"
+  done
+  "${sem}" --wait
+
   # Copy the following DICOM tags from the reference DICOM file into the new DICOM stack:
   #
   #   0008,0016 SOPClassUID - this will automatically update 0002,0002 MediaStorageSOPClassUID
