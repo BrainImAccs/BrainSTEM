@@ -17,14 +17,16 @@ function copyDCMTags {
 
   # Concat the DICOM tags to be copied and get the values all at once from the reference DICOM file
   "${dcmdump}" \
+    --convert-to-utf8 \
     --print-all \
+    --prepend \
     --no-uid-names \
     $(for dcm_tag in ${dcm_tags}; do echo -n " --search $dcm_tag"; done) \
     "${ref_dcm}" | \
       # Use regular expressions to clean up the data and remove the dcmdump-specific formatting. \
       sed \
         -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) [A-Z][A-Z] \[\(.*\)\].*#.*/\1 \2/' \
-        -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) US \(.*\) \+#.*/\1 \2/' \
+        -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) [USH]\+ \(.*\) \+#.*/\1 \2/' \
         -e 's/\\/\\\\/g' | while read tag data; do
           # Copy the values onto all files in the specified directory
           info "    Setting ${tag}=${data}"
