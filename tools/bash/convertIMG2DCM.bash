@@ -62,6 +62,7 @@ function convertIMG2DCM {
         --key "Modality=OT" \
         --key "BodyPartExamined=HEAD" \
         --key "0008,0050=${acc_no}" \
+        --key "0008,0005=ISO_IR 192" \
         "${input_dir}/bia-slice${slice}.jpg" \
         "${output_dir}/bia-slice${slice}.dcm" || error "img2dcm failed"
 
@@ -94,6 +95,7 @@ function convertIMG2DCM {
         --key "0020,1041=$SliceLocation" \
         --key "0020,0032=$ImagePositionPatient" \
         --key "0020,0037=$ImageOrientationPatient" \
+        --key "0008,0005=ISO_IR 192" \
         "${input_dir}/bia-slice${slice}.jpg" \
         "${output_dir}/bia-slice${slice}.dcm" || error "img2dcm failed"
     done

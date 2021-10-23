@@ -5,10 +5,6 @@
 # Note: Whenever you encounter a '-z' if test, these config variables may be overridden by setting an environment variable
 #
 
-# Language encoding, mostly needed for Umlaute
-#
-language_encoding="de_DE.ISO-8859-1"
-
 # PACS communication (to send studies back to the PACS)
 #
 if [ -z ${called_aetitle+x} ]; then called_aetitle="CALLING"; fi
