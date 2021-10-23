@@ -30,11 +30,12 @@ function copyDCMTags {
         -e 's/\\/\\\\/g' | while read tag data; do
           # Copy the values onto all files in the specified directory
           info "    Setting ${tag}=${data}"
-          "${dcmodify}" \
+          "${sem}" -j+0 "${dcmodify}" \
             --no-backup \
-            --insert "$tag"="$data" \
+            --insert \'"${tag}"="${data}"\' \
             "${output_dir}"/*
       done
+  "${sem}" --wait
 
   info "  copyDCMTags done"
 }
