@@ -71,6 +71,8 @@ function __b3bp_log () {
   local color_warning="\\x1b[33m"
   # shellcheck disable=SC2034
   local color_error="\\x1b[31m"
+  # shellcheck disable=SC2034
+  local color_context="\\x1b[2;96m"
 
   local colorvar="color_${log_level}"
 
@@ -80,15 +82,16 @@ function __b3bp_log () {
   if [[ "${NO_COLOR:-}" = "true" ]] || ( [[ "${TERM:-}" != "xterm"* ]] && [[ "${TERM:-}" != "screen"* ]] ) || [[ ! -t 2 ]]; then
     if [[ "${NO_COLOR:-}" != "false" ]]; then
       # Don't use colors on pipes or non-recognized terminals
-      color=""; color_reset=""
+      color_context=""; color=""; color_reset=""
     fi
   fi
 
   # all remaining arguments are to be printed
+  local context=" ${color_context}${GLOBAL_CONTEXT:-}${color_reset} "
   local log_line=""
 
   while IFS=$'\n' read -r log_line; do
-    echo -e "$(date -u +"%Y-%m-%d %H:%M:%S UTC") ${color}$(printf "[%7s]" "${log_level}")${color_reset} ${log_line}" 1>&2
+    echo -e "$(date -u +"%Y-%m-%d %H:%M:%S UTC") ${color}$(printf "[%7s]" "${log_level}")${color_reset}${context}${log_line}" 1>&2
   done <<< "${@:-}"
 }
 
