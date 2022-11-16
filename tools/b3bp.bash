@@ -86,12 +86,17 @@ function __b3bp_log () {
     fi
   fi
 
+  # Prefix log_line with context, if globally defined
+  local context=""
+  if [[ "${GLOBAL_CONTEXT:-}" ]]; then
+    context="${color_context}${GLOBAL_CONTEXT:-}${color_reset} "
+  fi
+
   # all remaining arguments are to be printed
-  local context=" ${color_context}${GLOBAL_CONTEXT:-}${color_reset} "
   local log_line=""
 
   while IFS=$'\n' read -r log_line; do
-    echo -e "$(date -u +"%Y-%m-%d %H:%M:%S UTC") ${color}$(printf "[%7s]" "${log_level}")${color_reset}${context}${log_line}" 1>&2
+    echo -e "$(date -u +"%Y-%m-%d %H:%M:%S UTC") ${color}$(printf "[%7s]" "${log_level}")${color_reset} ${context}${log_line}" 1>&2
   done <<< "${@:-}"
 }
 
