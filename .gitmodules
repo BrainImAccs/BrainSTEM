@@ -1,6 +1,0 @@
-[submodule "modules/fatbACPC"]
-	path = modules/fatbACPC
-	url = https://github.com/brainimaccs/fatbACPC.git
-[submodule "modules/veganbagel"]
-	path = modules/veganbagel
-	url = https://github.com/BrainImAccs/veganbagel.git
