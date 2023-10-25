@@ -18,8 +18,8 @@ fi
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Examples to launch the jobs (the module's Dockerfile will add specific calls)
-#"${__dir}/../modules/fatbACPC/fatbACPC.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
-#"${__dir}/../modules/veganbagel/veganbagel.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
+#"${__dir}/../../modules/fatbACPC/fatbACPC.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
+#"${__dir}/../../modules/veganbagel/veganbagel.bash" -i "$1" --cleanup 1>"$1/log" 2>&1
 
 # Modify the options to the module using environment variables
 
@@ -48,7 +48,7 @@ fi
 
 # Either write and keep log - or don't (default)
 if [ ! -z ${BIA_WRITE_LOG+x} ] && [[ "${BIA_WRITE_LOG:?}" == "1" ]]; then
-  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1" ${parameters} 2>&1 | tee "$1/log"
+  "${__dir}/../../${BIA_MODULE}.bash" -i "$1" ${parameters} 2>&1 | tee "$1/log"
 else
-  "${__dir}/../modules/${BIA_MODULE}/${BIA_MODULE}.bash" -i "$1" ${parameters}
+  "${__dir}/../../${BIA_MODULE}.bash" -i "$1" ${parameters}
 fi
