@@ -31,10 +31,23 @@ function getDCMTag {
     --prepend \
     --no-uid-names \
     --search ${tag} \
-    "${dcm}" | \
+    "${dcm}" 2>/dev/null | \
       grep -vE '^.*\)\.\(.* ' | \
       sed -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) LO (no value available).*#.*//' \
   )
+
+  # Sometimes UTF-8 decoding fails, then try again without --convert-to-utf8
+  if [[ $? -ne 0 ]]; then
+    local tempValue=$(${dcmdump} \
+      --print-all \
+      --prepend \
+      --no-uid-names \
+      --search ${tag} \
+      "${dcm}" | \
+        grep -vE '^.*\)\.\(.* ' | \
+        sed -e 's/\(([0-9a-f]\{4\},[0-9a-f]\{4\})\) LO (no value available).*#.*//' \
+    )
+  fi
 
   # If the length of tempValue is 0, the DICOM file does not contain that tag
   # Exit with code 2 and return an empty string
