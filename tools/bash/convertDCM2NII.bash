@@ -43,9 +43,9 @@ function convertDCM2NII {
 
   # Find the resulting NIfTI files and export the full path and filename in the nii variable
   if [ -e "${output}"/*[0-9]_Tilt_[0-9]".${extension}" ]; then
-    nii=($(ls -1t "${output}"/*[0-9]_Tilt_[0-9]".${extension}" | tac | head -n1))
+    nii=($(ls -1t "${output}"/*[0-9]_Tilt_[0-9]".${extension}" | grep -v "_ROI.${extension}" | tac | head -n1))
   else
-    nii=($(ls -1t "${output}"/*[0-9]".${extension}" | tac | head -n1))
+    nii=($(ls -1t "${output}"/*[0-9]".${extension}" | grep -v "_ROI.${extension}" | tac | head -n1))
   fi
 
   info "  fslreorient2std start"
