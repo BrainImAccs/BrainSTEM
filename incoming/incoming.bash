@@ -21,5 +21,5 @@ ${storescp} \
 	--sort-conc-studies bia \
 	--filename-extension '.dcm' \
 	--exec-on-eostudy "$incomingDir/../received/received.bash #p" \
-	--eostudy-timeout 30 \
+	--eostudy-timeout 15 \
 	${listening_port}
